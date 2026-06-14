@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Anjaneyalu ♥ Anushree — Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+--crimson:#7A0E1E;
+--crimson-mid:#A31B2D;
+--gold:#C99A38;
+--gold-light:#E8C060;
+--gold-pale:#F5E8B0;
+--cream:#FDF6EC;
+--cream-dark:#F0E4CC;
+--text-dark:#2A0F08;
+--text-mid:#5C2E18;
+--white:#FFF9F0;
+}
+html{scroll-behavior:smooth;height:100%;}
+body{background:var(--cream);font-family:'Lato',sans-serif;color:var(--text-dark);overflow-x:hidden;width:100%;min-height:100%;}
+
+/* ─── DOOR OVERLAY (iOS WebKit Optimized) ──────────────── */
+#doors-overlay{
+position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;display:flex;
+pointer-events:all;width:100%;height:100%;
+}
+.door{
+width:50%;height:100%;
+background:var(--crimson);
+position:relative;overflow:hidden;
+display:flex;align-items:center;justify-content:center;
+transition:transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+will-change:transform;
+}
+.door-left{
+transform-origin:left center;
+border-right:2px solid var(--gold);
+}
+.door-right{
+transform-origin:right center;
+border-left:2px solid var(--gold);
+}
+#doors-overlay.open .door-left{transform:translateX(-100%);}
+#doors-overlay.open .door-right{transform:translateX(100%);}
+
+/* Centre CTA */
+#door-cta{
+position:fixed;top:50%;left:50%;
+transform:translate(-50%,-50%);
+z-index:1000;display:flex;flex-direction:column;
+align-items:center;gap:14px;width:90%;max-width:320px;
+transition:opacity .4s,transform .4s;
+}
+.cta-ganesh{font-size:44px;animation:ctaPulse 2.2s ease-in-out infinite;}
+@keyframes ctaPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.cta-hint{
+font-family:'Cormorant Garamond',serif;font-size:13px;
+letter-spacing:.25em;text-transform:uppercase;
+color:var(--gold-pale);font-weight:300;text-align:center;
+}
+#open-btn{
+background:var(--gold);color:var(--text-dark);
+border:none;padding:14px 36px;
+font-family:'Cormorant Garamond',serif;
+font-size:19px;font-weight:700;
+letter-spacing:.06em;border-radius:4px;
+cursor:pointer;width:100%;
+box-shadow:0 6px 28px rgba(0,0,0,.35);
+transition:background .2s,transform .12s;
+}
+#door-cta.hidden{opacity:0;pointer-events:none;}
+
+/* ─── MAIN INVITATION ───────────────────────────────── */
+#invitation{opacity:0;transition:opacity .8s .2s;display:none;}
+#invitation.show{opacity:1;display:block;}
+
+/* ─── HERO ──────────────────────────────────────────── */
+.hero{
+background:var(--crimson);
+padding:60px 20px 48px;text-align:center;
+position:relative;overflow:hidden;
+}
+.hero-corner{position:absolute;width:70px;height:70px;opacity:.3;}
+.hero-corner.tl{top:0;left:0;}
+.hero-corner.tr{top:0;right:0;transform:scaleX(-1);}
+.hero-corner.bl{bottom:0;left:0;transform:scaleY(-1);}
+.hero-corner.br{bottom:0;right:0;transform:scale(-1);}
+
+.hero-om{
+display:block;font-size:40px;color:var(--gold);
+margin-bottom:6px;position:relative;
+}
+.hero-blessing{
+font-family:'Cormorant Garamond',serif;
+font-size:15px;font-style:italic;
+letter-spacing:.14em;color:var(--gold-light);
+margin-bottom:22px;position:relative;
+}
+.divider{
+display:flex;align-items:center;justify-content:center;
+gap:14px;margin:18px auto;position:relative;
+}
+.divider::before,.divider::after{
+content:'';flex:1;max-width:90px;height:1px;
+background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.divider-gem{color:var(--gold);font-size:14px;}
+.names-block{position:relative;}
+.name-title{
+font-family:'Cormorant Garamond',serif;
+font-size:13px;font-weight:300;
+letter-spacing:.2em;text-transform:uppercase;
+color:var(--gold-light);display:block;margin-bottom:4px;
+}
+.name-main{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(32px,7.5vw,54px);font-weight:700;
+color:var(--cream);line-height:1.1;
+display:block;
+}
+.name-amp{
+font-family:'Cormorant Garamond',serif;
+font-size:32px;font-style:italic;
+color:var(--gold);display:block;
+margin:6px 0;
+}
+.name-sub{
+font-family:'Cormorant Garamond',serif;
+font-size:20px;font-weight:300;
+font-style:italic;color:var(--gold-light);
+display:block;margin-top:2px;
+}
+.hero-tagline{
+font-family:'Lato',sans-serif;
+font-size:12px;font-weight:700;
+letter-spacing:.25em;text-transform:uppercase;
+color:var(--gold-light);margin-top:22px;
+opacity:.8;position:relative;
+}
+
+/* ─── COUNTDOWN ─────────────────────────────────────── */
+.countdown-wrap{
+background:var(--cream-dark);
+border-top:2px solid var(--gold);
+border-bottom:2px solid var(--gold);
+padding:24px 16px;text-align:center;
+}
+.section-eyebrow{
+font-size:11px;font-weight:700;
+letter-spacing:.25em;text-transform:uppercase;
+color:var(--crimson);margin-bottom:16px;
+}
+.cd-grid{
+display:flex;justify-content:center;
+gap:12px;
+}
+.cd-box{
+background:var(--crimson);
+color:var(--gold-pale);
+border-radius:4px;
+padding:10px 14px;
+min-width:64px;
+}
+.cd-num{
+font-family:'Cormorant Garamond',serif;
+font-size:32px;font-weight:700;
+line-height:1;display:block;
+color:var(--gold-light);
+}
+.cd-lbl{
+font-size:9px;letter-spacing:1px;
+text-transform:uppercase;color:var(--cream-dark);
+display:block;margin-top:4px;opacity:.8;
+}
+.cd-done{
+font-family:'Cormorant Garamond',serif;
+font-size:20px;font-style:italic;
+color:var(--crimson);
+}
+
+/* ─── EVENTS ────────────────────────────────────────── */
+.events-section{
+padding:40px 16px;
+max-width:600px;margin:0 auto;
+}
+.events-heading{
+text-align:center;
+font-family:'Cormorant Garamond',serif;
+font-size:28px;font-weight:700;
+color:var(--crimson);margin-bottom:4px;
+}
+.events-sub{
+text-align:center;font-size:13px;
+color:var(--text-mid);margin-bottom:32px;
+}
+.event-card{
+background:var(--white);
+border:1px solid var(--cream-dark);
+border-top:4px solid var(--gold);
+border-radius:6px;padding:24px 20px;
+margin-bottom:24px;
+box-shadow:0 4px 20px rgba(122,14,30,0.08);
+}
+.event-badge{
+display:inline-block;
+background:var(--crimson);color:var(--gold-pale);
+font-size:10px;font-weight:700;
+letter-spacing:.15em;text-transform:uppercase;
+padding:4px 10px;border-radius:2px;
+margin-bottom:12px;
+}
+.event-name{
+font-family:'Cormorant Garamond',serif;
+font-size:26px;font-weight:700;
+color:var(--crimson);margin-bottom:4px;
+}
+.event-desc{
+font-size:13px;font-style:italic;
+color:var(--text-mid);margin-bottom:16px;
+}
+.detail-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;margin-bottom:16px;
+}
+.detail-pill{
+background:var(--cream);border-radius:3px;
+padding:8px 12px;
+border-left:3px solid var(--gold);
+}
+.detail-pill-label{
+font-size:9px;font-weight:700;
+letter-spacing:1px;text-transform:uppercase;
+color:var(--gold);display:block;margin-bottom:2px;
+}
+.detail-pill-val{
+font-family:'Cormorant Garamond',serif;
+font-size:14px;color:var(--text-dark);
+font-weight:600;
+}
+.venue-line{
+font-size:13px;color:var(--text-mid);
+margin-bottom:16px;line-height:1.4;
+}
+.maps-btn{
+display:inline-block;
+border:2px solid var(--crimson);
+color:var(--crimson);background:transparent;
+padding:10px 20px;
+font-size:11px;font-weight:700;
+letter-spacing:1px;text-transform:uppercase;
+text-decoration:none;border-radius:2px;
+text-align:center;
+}
+
+/* ─── BLESSINGS BAND ─────────────────────────────────── */
+.blessings{
+background:var(--crimson);
+padding:36px 20px;text-align:center;
+}
+.blessings-quote{
+font-family:'Cormorant Garamond',serif;
+font-size:18px;font-style:italic;
+color:var(--gold-pale);
+max-width:480px;margin:0 auto 10px;
+line-height:1.5;
+}
+.blessings-names{
+font-size:12px;color:var(--gold-light);
+letter-spacing:.05em;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+footer{
+background:var(--text-dark);
+padding:20px 16px;text-align:center;
+color:var(--gold-light);font-size:11px;
+letter-spacing:.05em;line-height:1.4;
+}
+
+/* ─── MUSIC BTN ──────────────────────────────────────── */
+#music-btn{
+position:fixed;bottom:20px;right:20px;z-index:200;
+width:48px;height:48px;border-radius:50%;
+background:var(--crimson);border:2px solid var(--gold);
+color:var(--gold);font-size:20px;
+display:none;align-items:center;justify-content:center;
+cursor:pointer;
+box-shadow:0 4px 14px rgba(0,0,0,.25);
+}
+</style>
+</head>
+<body>
+
+<!-- DOOR REVEAL -->
+<div id="doors-overlay">
+<div class="door door-left"></div>
+<div class="door door-right"></div>
+</div>
+
+<!-- Centre CTA -->
+<div id="door-cta">
+<span class="cta-ganesh">🙏</span>
+<span class="cta-hint">You are cordially invited</span>
+<button id="open-btn" onclick="openDoors()">✦ Open Invitation ✦</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="invitation">
+
+<!-- HERO -->
+<section class="hero">
+<span class="hero-om">ॐ</span>
+<div class="hero-blessing">Sri Ganeshaya Namaha · Shubh Vivah[span_0](start_span)[span_0](end_span)</div>
+<div class="divider"><span class="divider-gem">✦</span></div>
+<div class="names-block">
+<span class="name-title">Groom[span_1](start_span)[span_1](end_span)</span>
+<span class="name-main">Chi. Anjaneyalu[span_2](start_span)[span_2](end_span)</span>
+<span class="name-amp">&amp;[span_3](start_span)[span_3](end_span)</span>
+<span class="name-title">Bride[span_4](start_span)[span_4](end_span)</span>
+<span class="name-main">Chi. Kum. Sou. Anushree[span_5](start_span)[span_5](end_span)</span>
+<span class="name-sub">(Ramyashree)[span_6](start_span)[span_6](end_span)</span>
+</div>
+<div class="divider" style="margin-top:24px"><span class="divider-gem">❧</span></div>
+<p class="hero-tagline">Request the Honour of Your Presence[span_7](start_span)[span_7](end_span)</p>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-wrap">
+<div class="section-eyebrow">Muhurham Countdown[span_8](start_span)[span_8](end_span)</div>
+<div class="cd-grid" id="cd-grid">
+<div class="cd-box"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Days</span></div>
+<div class="cd-box"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Hours</span></div>
+<div class="cd-box"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">Mins</span></div>
+<div class="cd-box"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Secs</span></div>
+</div>
+</div>
+
+<!-- EVENTS -->
+<section class="events-section">
+<h2 class="events-heading">Wedding Celebrations[span_9](start_span)[span_9](end_span)</h2>
+<p class="events-sub">Join us for these auspicious occasions[span_10](start_span)[span_10](end_span)</p>
+
+<!-- MUHURHAM -->
+<div class="event-card">
+<span class="event-badge">Muhurham · Wedding Ceremony[span_11](start_span)[span_11](end_span)</span>
+<div class="event-name">Shubh Vivah[span_12](start_span)[span_12](end_span)</div>
+<div class="event-desc">Mangalyam Ceremony[span_13](start_span)[span_13](end_span)</div>
+<div class="detail-grid">
+<div class="detail-pill">
+<span class="detail-pill-label">Date</span>
+<span class="detail-pill-val">Wednesday, 25th June 2026[span_14](start_span)[span_14](end_span)</span>
+</div>
+<div class="detail-pill">
+<span class="detail-pill-label">Muhurham</span>
+<span class="detail-pill-val">7:58 AM (Mangalyam)[span_15](start_span)[span_15](end_span)</span>
+</div>
+</div>
+<div class="venue-line">
+📍 <span>Sri Rajamatha Kalyana Mantapa, Ashapur Road, Raichur[span_16](start_span)[span_16](end_span)</span>
+</div>
+<a class="maps-btn" href="https://maps.app.goo.gl/F6LbB43CxEVzrrgk6" target="_blank" rel="noopener">Get Directions[span_17](start_span)[span_17](end_span)</a>
+</div>
+
+<!-- RECEPTION -->
+<div class="event-card">
+<span class="event-badge">Reception[span_18](start_span)[span_18](end_span)</span>
+<div class="event-name">Grand Reception[span_19](start_span)[span_19](end_span)</div>
+<div class="event-desc">Blessings &amp; Celebrations[span_20](start_span)[span_20](end_span)</div>
+<div class="detail-grid">
+<div class="detail-pill">
+<span class="detail-pill-label">Date</span>
+<span class="detail-pill-val">Saturday, 27th June 2026[span_21](start_span)[span_21](end_span)</span>
+</div>
+<div class="detail-pill">
+<span class="detail-pill-label">Time</span>
+<span class="detail-pill-val">11:41 AM Onwards[span_22](start_span)[span_22](end_span)</span>
+</div>
+</div>
+<div class="venue-line">
+📍 <span>Katare Kalyana Mantapa, Bhagyanagara, Koppal[span_23](start_span)[span_23](end_span)</span>
+</div>
+<a class="maps-btn" href="https://maps.app.goo.gl/q1SkhGa1zkLK5a3Z7" target="_blank" rel="noopener">Get Directions[span_24](start_span)[span_24](end_span)</a>
+</div>
+</section>
+
+<!-- BLESSINGS -->
+<div class="blessings">
+<p class="blessings-quote">"With the blessings of our beloved families, we joyfully invite you to celebrate and share in our happiness[span_25](start_span)"[span_25](end_span)</p>
+<p class="blessings-names">Chi. Anjaneyalu &amp; Chi. Kum. Sou. Anushree (Ramyashree)[span_26](start_span)[span_26](end_span)</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+<p>Shubh Vivah · 25 June 2026 &amp; 27 June 2026 · Raichur &amp; Koppal, Karnataka[span_27](start_span)[span_27](end_span)</p>
+</footer>
+</div>
+
+<button id="music-btn" onclick="toggleMusic()">🎵</button>
+
+<script>
+/* ── DOOR OPEN ── */
+function openDoors(){
+document.getElementById('door-cta').style.display = 'none';
+document.getElementById('doors-overlay').classList.add('open');
+document.getElementById('invitation').classList.add('show');
+setTimeout(()=>{
+document.getElementById('music-btn').style.display='flex';
+document.getElementById('doors-overlay').style.display='none';
+},1300);
+}
+
+/* ── COUNTDOWN ── */
+function pad(n){return String(n).padStart(2,'0');}
+function tick(){
+const target=new Date('2026-06-25T07:58:00');[span_28](start_span)[span_28](end_span)
+const diff=target-new Date();
+if(diff<=0){
+document.getElementById('cd-grid').innerHTML=
+'<p class="cd-done">🎉 Auspicious Muhurham Time Has Arrived! 🎉</p>';[span_29](start_span)[span_29](end_span)
+return;
+}
+document.getElementById('cd-d').textContent=pad(Math.floor(diff/86400000));
+document.getElementById('cd-h').textContent=pad(Math.floor(diff%86400000/3600000));
+document.getElementById('cd-m').textContent=pad(Math.floor(diff%3600000/60000));
+document.getElementById('cd-s').textContent=pad(Math.floor(diff%60000/1000));
+}
+tick();
+setInterval(tick,1000);
+
+/* ── AUDIO CONTEXT SAFETY TRIGGER ── */
+let ctx=null,gain=null,playing=false;
+function makeMusic(){
+try {
+ctx=new(window.AudioContext||window.webkitAudioContext)();
+gain=ctx.createGain();
+gain.gain.setValueAtTime(0,ctx.currentTime);
+gain.connect(ctx.destination);
+[293.66,370.0,440.0,493.88,587.33].forEach((f,i)=>{[span_30](start_span)[span_30](end_span)
+const o=ctx.createOscillator(),g=ctx.createGain();
+o.type='sine'; o.frequency.value=f;
+g.gain.value=0.1/(i+1);
+o.connect(g);g.connect(gain);o.start();
+});
+} catch(e) { console.log('Audio not supported'); }
+}
+function toggleMusic(){
+const btn=document.getElementById('music-btn');
+if(!playing){
+if(!ctx) makeMusic();
+if(ctx) { ctx.resume(); gain.gain.linearRampToValueAtTime(0.1,ctx.currentTime+1); }
+btn.textContent='🎶';
+} else {
+if(gain) gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.5);
+btn.textContent='🎵';
+}
+playing=!playing;
+}
+</script>
+</body>
+</html>
